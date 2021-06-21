@@ -24,14 +24,14 @@ class RegisterController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
 
-        // try {
-        $user = User::create($input);
-        $user->sendEmailVerificationNotification();
-        // } catch (\Throwable $th) {
-        //     return response()->json([
-        //         "message" => "Something went Wrong"
-        //     ], 401);
-        // }
+        try {
+            $user = User::create($input);
+            $user->sendEmailVerificationNotification();
+        } catch (\Throwable $th) {
+            return response()->json([
+                "message" => "Something went Wrong"
+            ], 401);
+        }
 
 
 
